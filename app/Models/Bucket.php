@@ -9,6 +9,11 @@ class Bucket extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'volume'];
+    public function balls()
+    {
+        return $this->hasMany(Ball::class);
+    }
+
     public static function placeBallsInBuckets($balls)
     {
         $buckets = Bucket::orderBy('volume', 'desc')->get();
@@ -55,6 +60,10 @@ class Bucket extends Model
         $this->save();
     }
 
+    public function filledVolume()
+    {
+        return $this->balls()->sum('volume');
+    }
 
     public static function emptyBucket()
     {

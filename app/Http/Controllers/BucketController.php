@@ -9,7 +9,7 @@ class BucketController extends Controller
 {
     public function index()
     {
-        $buckets = Bucket::all();
+        $buckets = Bucket::with('balls')->get();
         return view('buckets.index', compact('buckets'));
     }
 
@@ -24,6 +24,7 @@ class BucketController extends Controller
             Bucket::create([
                 'name' => $validatedData['name'],
                 'volume' => $validatedData['volume'],
+                'ball' => null,
             ]);
 
             return redirect()->route('buckets.index')

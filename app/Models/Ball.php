@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Ball extends Model
 {
     use HasFactory;
+    public function bucket()
+    {
+        return $this->belongsTo(Bucket::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

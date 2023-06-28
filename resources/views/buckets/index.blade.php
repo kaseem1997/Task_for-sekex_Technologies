@@ -38,21 +38,10 @@
             <button type="submit" class="btn btn-primary">Suggest Buckets</button>
         </form>
 
-        <h2>List of Buckets</h2>
-
         <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Volume</th>
-                </tr>
-            </thead>
             <tbody>
                 @foreach ($buckets as $bucket)
-                <tr>
-                    <td>{{ $bucket->name }}</td>
-                    <td>{{ $bucket->volume }}</td>
-                </tr>
+                <li>{{ $bucket->name }} - Volume: {{ $bucket->volume }} - Filled Volume: {{ $bucket->filledVolume() }}</li>
                 @endforeach
             </tbody>
         </table>
