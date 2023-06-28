@@ -15,8 +15,9 @@ class CreateBucketsTable extends Migration
     {
         Schema::create('buckets', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->default('')->nullable();
             $table->decimal('volume', 8, 2)->nullable();
+            $table->string('ball')->nullable();
             $table->timestamps();
         });
     }

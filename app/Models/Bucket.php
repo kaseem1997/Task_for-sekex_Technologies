@@ -49,6 +49,11 @@ class Bucket extends Model
         return true;
     }
 
+    public function fillVolume($ballVolume, $placedQuantity)
+    {
+        $this->volume -= $ballVolume * $placedQuantity;
+        $this->save();
+    }
 
 
     public static function emptyBucket()

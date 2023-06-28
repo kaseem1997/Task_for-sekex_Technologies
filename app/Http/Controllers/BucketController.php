@@ -21,7 +21,10 @@ class BucketController extends Controller
         ]);
 
         try {
-            Bucket::create($validatedData);
+            Bucket::create([
+                'name' => $validatedData['name'],
+                'volume' => $validatedData['volume'],
+            ]);
 
             return redirect()->route('buckets.index')
                 ->with('success', 'Bucket created successfully.');
@@ -33,6 +36,29 @@ class BucketController extends Controller
     }
 
 
+    // public function suggestBuckets(Request $request)
+    // {
+    //     $balls = [
+    //         'Pink' => 2.5,
+    //         'Red' => 2,
+    //         'Blue' => 1,
+    //         'Orange' => 0.8,
+    //         'Green' => 0.5,
+    //     ];
+
+    //     $bucketVolume = $request->input('volume');
+    //     $suggestedBuckets = [];
+
+    //     foreach ($balls as $ball => $ballVolume) {
+    //         $numBalls = floor($bucketVolume / $ballVolume);
+    //         if ($numBalls > 0) {
+    //             $suggestedBuckets[$ball] = $numBalls;
+    //             $bucketVolume -= $numBalls * $ballVolume;
+    //         }
+    //     }
+
+    //     return response()->json($suggestedBuckets);
+    // }
     public function suggestBuckets(Request $request)
     {
         $balls = [
@@ -54,6 +80,6 @@ class BucketController extends Controller
             }
         }
 
-        return response()->json($suggestedBuckets);
+        return view('buckets.suggestion-result', compact('suggestedBuckets'));
     }
 }
